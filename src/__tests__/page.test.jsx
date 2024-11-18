@@ -6,6 +6,6 @@ describe('Home', () => {
     it('renders a home page', () => {
         render(<Home />)
 
-        expect(screen.getByText('Home Page')).toBeInTheDocument();
+        expect(screen.getByText('Welcome Bogotea in Nhat Thien district')).toBeInTheDocument();
     })
 })
