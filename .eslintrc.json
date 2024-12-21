@@ -1,3 +1,22 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": [
+    "next/core-web-vitals", // Keep Next.js core web vitals linting
+    "next/typescript", // Keep Next.js TypeScript rules
+    "plugin:prettier/recommended", // Run Prettier via ESLint (ensures formatting)
+    "plugin:tailwindcss/recommended" // Tailwind CSS linting rules
+  ],
+  "plugins": [
+    "react", // React plugin for React-specific linting
+    "prettier", // Prettier plugin to run formatting rules as ESLint rules
+    "tailwindcss" // Tailwind CSS plugin to lint Tailwind classes
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "rules": {
+    "prettier/prettier": "error", // Mark Prettier errors as ESLint errors
+    "tailwindcss/classnames-order": "warn" // Optionally enforce class ordering for Tailwind CSS
+  }
 }
