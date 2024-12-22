@@ -1,4 +1,4 @@
-import ImageEditor from '@/components/FilterPage/ImageEditor';
+import ImageEditor from '@/app/filter/components/ImageEditor';
 
 const Filter = () => {
   return (
