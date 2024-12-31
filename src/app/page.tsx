@@ -1,4 +1,8 @@
+import { authConfig } from '@/libs/auth';
 import { Metadata } from 'next';
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
+import SignInForm from './auth/signin/components/SignInForm';
 
 export const metadata: Metadata = {
   title: 'Home Page',
@@ -22,12 +26,14 @@ export const metadata: Metadata = {
   },
 };
 
-const Home = () => {
-  return (
-    <div>
-      <p>Home Page</p>
-    </div>
-  );
+const Home = async () => {
+  const session = await getServerSession(authConfig);
+
+  if (session) {
+    redirect("/chat");
+  }
+
+  return <SignInForm />;
 };
 
 export default Home;

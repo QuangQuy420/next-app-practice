@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { signOut } from 'next-auth/react';
 
 const ChatHeader = () => {
   return (
@@ -9,6 +10,7 @@ const ChatHeader = () => {
       <div className="space-x-4">
         <button className="text-gray-400 hover:text-white">🔍</button>
         <button className="text-gray-400 hover:text-white">⚙️</button>
+        <button onClick={() => signOut()} className="text-gray-400 hover:text-white">Log out</button>
       </div>
     </div>
   );

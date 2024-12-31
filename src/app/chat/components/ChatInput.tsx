@@ -1,7 +1,8 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { connectSocket, disconnectSocket, socket } from '../socket';
 
 type MessageInput = {
   message: string;
@@ -9,9 +10,27 @@ type MessageInput = {
 
 const ChatInput = () => {
   const { register, handleSubmit, reset } = useForm<MessageInput>();
+  const [webSocket, setWebSocket] = useState<WebSocket>(null as unknown as WebSocket)
+
+  useEffect(() => {
+    connectSocket();
+
+    socket.on('message', (message) => {
+      console.log('Received message:', message);
+    });
+
+    return () => {
+      socket.off('message');
+      disconnectSocket();
+    };
+  }, []);
+
+  const sendMessage = (message: string) => {
+    socket.emit('sendMessage', message);
+  };
 
   const onSubmit: SubmitHandler<MessageInput> = (data) => {
-    console.log('Message Sent:', data.message);
+    sendMessage(data.message);
     reset();
   };
 
